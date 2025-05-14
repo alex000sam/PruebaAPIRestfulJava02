@@ -6,6 +6,7 @@ import com.ejercicio.demo.dto.ModificarUsuarioRequest;
 import com.ejercicio.demo.model.TelefonoModel;
 import com.ejercicio.demo.model.UsuarioModel;
 import com.ejercicio.demo.repository.UsuarioRepository;
+import com.ejercicio.demo.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class UsuarioService {
 
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Value("${password.regexp}")
     private String passwordRegex;
@@ -55,7 +59,7 @@ public class UsuarioService {
         usuario.setModificado(LocalDateTime.now());
         usuario.setUltimoLogin(LocalDateTime.now());
         usuario.setActivo(true);
-        usuario.setToken("");
+        usuario.setToken(jwtUtil.generarToken(request.getCorreo()));
 
         List<TelefonoModel> telefonos = new ArrayList<>();
         for (CrearTelefonoRequest tr : request.getTelefonos()) {
