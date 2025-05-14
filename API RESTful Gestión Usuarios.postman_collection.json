@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "c601233e-6094-49c1-8d08-736e960c0846",
+		"name": "API RESTful Gestión Usuarios",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar Usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuario por ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/acd2439c-4416-4a02-8c7f-9e891",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"acd2439c-4416-4a02-8c7f-9e891"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Rodriguez\",\r\n    \"correo\": \"juan@rodriguez.org\",\r\n    \"contrasena\": \"hunter2\",\r\n    \"telefonos\": [\r\n        {\r\n            \"numero\": \"1234567\",\r\n            \"codigoCiudad\": \"1\",\r\n            \"codigoPais\": \"57\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Usuario 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Alexander Samaniego\",\r\n    \"correo\": \"asamanil@emeal.nttdata.com\",\r\n    \"contrasena\": \"12345678ABC\",\r\n    \"telefonos\": [\r\n        {\r\n            \"numero\": \"12345678\",\r\n            \"codigoCiudad\": \"1\",\r\n            \"codigoPais\": \"51\"\r\n        },\r\n        {\r\n            \"numero\": \"11111111\",\r\n            \"codigoCiudad\": \"1\",\r\n            \"codigoPais\": \"51\"\r\n        },\r\n        {\r\n            \"numero\": \"2222222\",\r\n            \"codigoCiudad\": \"1\",\r\n            \"codigoPais\": \"51\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Usuario por ID",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Rodriguez\",\r\n    \"correo\": \"juan@rodriguez.org2\",\r\n    \"contrasena\": \"hunter23\",\r\n    \"telefonos\": [\r\n        {\r\n            \"numero\": \"1234567\",\r\n            \"codigoCiudad\": \"1\",\r\n            \"codigoPais\": \"57\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/5673ef1f-fbf7-4605-883e-7c53e73611da",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"5673ef1f-fbf7-4605-883e-7c53e73611da"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Usuario Parcial por ID",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Rodriguez 999\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/bf57c570-17a8-4b1a-a982-0d741632c932",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"bf57c570-17a8-4b1a-a982-0d741632c932"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Usuario por ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/6ce884af-8f52-4502-bba0-937d5f1c08b6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"6ce884af-8f52-4502-bba0-937d5f1c08b6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
