@@ -164,4 +164,17 @@ public class UsuarioService {
         usuario.setModificado(LocalDateTime.now());
         return usuarioRepository.save(usuario);
     }
+
+    public void eliminarUsuario(UUID id) {
+        if (!usuarioRepository.existsById(id)) {
+            throw new RuntimeException("Usuario no encontrado");
+        }
+        usuarioRepository.deleteById(id);
+    }
+
+    public UsuarioModel obtenerUsuario(UUID id) {
+        UsuarioModel usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return usuario;
+    }
 }

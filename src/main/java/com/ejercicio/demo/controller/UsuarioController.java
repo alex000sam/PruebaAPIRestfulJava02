@@ -82,4 +82,32 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje", ex.getMessage()));
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> eliminarUsuario(@PathVariable UUID id) {
+        try {
+            usuarioService.eliminarUsuario(id);
+            return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("mensaje", "Usuario eliminado"));
+        } catch (RuntimeException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje", ex.getMessage()));
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> obtenerUsuario(@PathVariable UUID id) {
+        try {
+            UsuarioModel usuario = usuarioService.obtenerUsuario(id);
+            ListarUsuarioResponse response = new ListarUsuarioResponse(
+                    usuario.getId(),
+                    usuario.getNombre(),
+                    usuario.getCorreo(),
+                    usuario.getCreado(),
+                    usuario.getModificado(),
+                    usuario.getUltimoLogin(),
+                    usuario.isActivo());
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje", ex.getMessage()));
+        }
+    }
 }
