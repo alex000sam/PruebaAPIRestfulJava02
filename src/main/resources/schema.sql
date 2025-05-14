@@ -1,0 +1,20 @@
+CREATE TABLE USUARIO (
+	id UUID PRIMARY KEY,
+	nombre VARCHAR(255) NOT NULL,
+	correo VARCHAR(255) UNIQUE NOT NULL,
+	contrasena VARCHAR(255) NOT NULL,
+	creado TIMESTAMP,
+	modificado TIMESTAMP,
+	ultimo_login TIMESTAMP,
+	token VARCHAR(512),
+	activo BOOLEAN
+);
+
+CREATE TABLE TELEFONO (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	numero VARCHAR(20),
+	codigo_ciudad VARCHAR(10),
+	codigo_pais VARCHAR(10),
+	usuario_id UUID,
+	CONSTRAINT fk_usuario_telefono FOREIGN KEY (usuario_id) REFERENCES USUARIO(id)
+);
