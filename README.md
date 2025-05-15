@@ -32,3 +32,6 @@
 3. Ejecuta la aplicación o inicia el modo `debug`. De acuerdo a la configuración del proyecto este ejecutará automáticamente los scripts sql ubicados en /src/main/resources/ (schema.sql y data.sql). 
 4. La aplicación correrá en `http://localhost:8080`
 5. Se puede probar desde Postman con el archivo `API RESTful Gestión Usuarios.postman_collection.json` ubicado en la raiz.
+
+## ▶️ Swagger
+`http://localhost:8080/swagger-ui/index.html`

@@ -28,7 +28,7 @@ public class UsuarioService {
     private JwtUtil jwtUtil;
 
     @Value("${password.regexp}")
-    private String passwordRegex;
+    public String passwordRegex;
 
     public List<UsuarioModel> listarTodosLosUsuarios() {
         return (List<UsuarioModel>) usuarioRepository.findAll();
