@@ -2,10 +2,16 @@ package com.ejercicio.demo.dto;
 
 import java.util.List;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class CrearUsuarioRequest {
 
+    @NotBlank(message = "El nombre es obligatorio")
     private String nombre;
 
+    @Email(message = "Formato de correo inválido")
+    @NotBlank(message = "El correo es obligatorio")
     private String correo;
 
     private String contrasena;
