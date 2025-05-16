@@ -3,6 +3,7 @@ package com.ejercicio.demo.controller;
 import com.ejercicio.demo.dto.*;
 import com.ejercicio.demo.model.UsuarioModel;
 import com.ejercicio.demo.service.UsuarioService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+@SecurityRequirement(name = "Bearer Authentication")
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {

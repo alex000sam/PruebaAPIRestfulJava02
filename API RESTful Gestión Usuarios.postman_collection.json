@@ -8,6 +8,16 @@
 		{
 			"name": "Listar Usuarios",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2FtYW5pbEBlbWVhbC5udHRkYXRhLmNvbSIsImlhdCI6MTc0NzM1NTYyNywiZXhwIjoxNzQ3NDQyMDI3fQ.FRD5M6ZK4ssk_QZTlf0Nx3fqA0X2t243IFs9LgrMs0w",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
@@ -107,11 +117,61 @@
 		{
 			"name": "Modificar Usuario por ID",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuQHJvZHJpZ3Vlei5vcmciLCJpYXQiOjE3NDc0MDE0OTIsImV4cCI6MTc0NzQ4Nzg5Mn0.hP7UEbnAbLDYKQgFUW1tPAWjTO5qv3rrsaRBhihgAEE",
+							"type": "string"
+						}
+					]
+				},
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"nombre\": \"Juan Rodriguez\",\r\n    \"correo\": \"juan@rodriguez.org2\",\r\n    \"contrasena\": \"hunter23\",\r\n    \"telefonos\": [\r\n        {\r\n            \"numero\": \"1234567\",\r\n            \"codigoCiudad\": \"1\",\r\n            \"codigoPais\": \"57\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/usuarios/5fcd2510-be89-4d51-be94-3533552287c9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"usuarios",
+						"5fcd2510-be89-4d51-be94-3533552287c9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Usuario Parcial por ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuQHJvZHJpZ3Vlei5vcmciLCJpYXQiOjE3NDc0MDE0OTIsImV4cCI6MTc0NzQ4Nzg5Mn0.hP7UEbnAbLDYKQgFUW1tPAWjTO5qv3rrsaRBhihgAEE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\": \"Juan Rodriguez 999\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -135,38 +195,18 @@
 			"response": []
 		},
 		{
-			"name": "Modificar Usuario Parcial por ID",
-			"request": {
-				"method": "PATCH",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nombre\": \"Juan Rodriguez 999\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/api/usuarios/bf57c570-17a8-4b1a-a982-0d741632c932",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"usuarios",
-						"bf57c570-17a8-4b1a-a982-0d741632c932"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Eliminar Usuario por ID",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqdWFuQHJvZHJpZ3Vlei5vcmciLCJpYXQiOjE3NDc0MDE0OTIsImV4cCI6MTc0NzQ4Nzg5Mn0.hP7UEbnAbLDYKQgFUW1tPAWjTO5qv3rrsaRBhihgAEE",
+							"type": "string"
+						}
+					]
+				},
 				"method": "DELETE",
 				"header": [],
 				"body": {
