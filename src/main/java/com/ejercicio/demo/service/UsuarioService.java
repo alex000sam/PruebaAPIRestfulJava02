@@ -87,7 +87,7 @@ public class UsuarioService {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         //Validar formato de correo
-        if (!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", request.getCorreo())) {
+        if (!Pattern.matches(correoRegex, request.getCorreo())) {
             throw new RuntimeException("Formato de correo inválido");
         }
 
@@ -109,15 +109,16 @@ public class UsuarioService {
         usuario.setActivo(request.getActivo());
         usuario.setModificado(LocalDateTime.now());
 
-        List<TelefonoModel> telefonos = new ArrayList<>();
-        for (CrearTelefonoRequest tr : request.getTelefonos()) {
-            TelefonoModel telefono = new TelefonoModel();
-            telefono.setNumero(tr.getNumero());
-            telefono.setCodigoCiudad(tr.getCodigoCiudad());
-            telefono.setCodigoPais(tr.getCodigoPais());
-            telefono.setUsuario(usuario);
-            telefonos.add(telefono);
-        }
+        List<TelefonoModel> telefonos = request.getTelefonos().stream()
+            .map(tr -> {
+                TelefonoModel telefono = new TelefonoModel();
+                telefono.setNumero(tr.getNumero());
+                telefono.setCodigoCiudad(tr.getCodigoCiudad());
+                telefono.setCodigoPais(tr.getCodigoPais());
+                telefono.setUsuario(usuario);
+                return telefono;
+            })
+            .collect(Collectors.toList());
 
         usuario.setTelefonos(telefonos);
 
@@ -132,7 +133,7 @@ public class UsuarioService {
         //Validar formato de correo
         if (request.getCorreo() != null && !request.getCorreo().isBlank()) {
 
-            if (!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", request.getCorreo())) {
+            if (!Pattern.matches(correoRegex, request.getCorreo())) {
                 throw new RuntimeException("Formato de correo inválido");
             }
 
@@ -158,16 +159,17 @@ public class UsuarioService {
         }
 
         if (request.getTelefonos() != null) {
-            List<TelefonoModel> nuevos = new ArrayList<>();
-            for (CrearTelefonoRequest pr : request.getTelefonos()) {
-                TelefonoModel telefono = new TelefonoModel();
-                telefono.setNumero(pr.getNumero());
-                telefono.setCodigoCiudad(pr.getCodigoCiudad());
-                telefono.setCodigoPais(pr.getCodigoPais());
-                telefono.setUsuario(usuario);
-                nuevos.add(telefono);
-            }
-            usuario.setTelefonos(nuevos);
+            List<TelefonoModel> telefonos = request.getTelefonos().stream()
+                .map(tr -> {
+                    TelefonoModel telefono = new TelefonoModel();
+                    telefono.setNumero(tr.getNumero());
+                    telefono.setCodigoCiudad(tr.getCodigoCiudad());
+                    telefono.setCodigoPais(tr.getCodigoPais());
+                    telefono.setUsuario(usuario);
+                    return telefono;
+                })
+                .collect(Collectors.toList());
+            usuario.setTelefonos(telefonos);
         }
 
         usuario.setModificado(LocalDateTime.now());
