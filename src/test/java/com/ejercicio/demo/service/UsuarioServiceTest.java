@@ -35,6 +35,7 @@ public class UsuarioServiceTest {
 
         //Expresión regular para la contraseña
         usuarioService.passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$";
+        usuarioService.correoRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
     }
 
     @Test

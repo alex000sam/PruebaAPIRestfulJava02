@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -30,6 +31,9 @@ public class UsuarioService {
     @Value("${password.regexp}")
     public String passwordRegex;
 
+    @Value("${correo.regexp}")
+    public String correoRegex;
+
     public List<UsuarioModel> listarTodosLosUsuarios() {
         return (List<UsuarioModel>) usuarioRepository.findAll();
     }
@@ -42,7 +46,7 @@ public class UsuarioService {
         }
 
         //Validar formato de correo
-        if (!Pattern.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", request.getCorreo())) {
+        if (!Pattern.matches(correoRegex, request.getCorreo())) {
             throw new RuntimeException("Formato de correo inválido");
         }
 
@@ -61,15 +65,16 @@ public class UsuarioService {
         usuario.setActivo(true);
         usuario.setToken(jwtUtil.generarToken(request.getCorreo()));
 
-        List<TelefonoModel> telefonos = new ArrayList<>();
-        for (CrearTelefonoRequest tr : request.getTelefonos()) {
-            TelefonoModel telefono = new TelefonoModel();
-            telefono.setNumero(tr.getNumero());
-            telefono.setCodigoCiudad(tr.getCodigoCiudad());
-            telefono.setCodigoPais(tr.getCodigoPais());
-            telefono.setUsuario(usuario);
-            telefonos.add(telefono);
-        }
+        List<TelefonoModel> telefonos = request.getTelefonos().stream()
+            .map(tr -> {
+                TelefonoModel telefono = new TelefonoModel();
+                telefono.setNumero(tr.getNumero());
+                telefono.setCodigoCiudad(tr.getCodigoCiudad());
+                telefono.setCodigoPais(tr.getCodigoPais());
+                telefono.setUsuario(usuario);
+                return telefono;
+            })
+            .collect(Collectors.toList());
 
         usuario.setTelefonos(telefonos);
 
