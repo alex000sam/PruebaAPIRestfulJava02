@@ -14,13 +14,18 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("API RESTful de Gestión Usuarios")
                         .description("API RESTful de Gestión Usuarios con CRUD y JWT")
-                        .version("1.0.0"))
+                        .version("1.0.0")
+                        .contact(new io.swagger.v3.oas.models.info.Contact()
+                                .name("prueba")
+                                .email("prueba@correo.com")))
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
-                .components(new Components().addSecuritySchemes("Bearer Authentication",new SecurityScheme()
-                        .name("Bearer Authentication")
-                        .type(SecurityScheme.Type.HTTP)
-                        .scheme("bearer")
-                        .bearerFormat("JWT")
+                .components(new Components().addSecuritySchemes("Bearer Authentication",
+                        new SecurityScheme()
+                                .name("Authorization")
+                                .type(SecurityScheme.Type.HTTP)
+                                .scheme("bearer")
+                                .bearerFormat("JWT")
+                                .in(SecurityScheme.In.HEADER)
                 ));
     }
 }

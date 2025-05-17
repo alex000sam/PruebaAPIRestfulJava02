@@ -1,6 +1,7 @@
 package com.ejercicio.demo.controller;
 
 import com.ejercicio.demo.dto.*;
+import com.ejercicio.demo.mapper.UsuarioMapper;
 import com.ejercicio.demo.model.UsuarioModel;
 import com.ejercicio.demo.service.UsuarioService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -21,6 +22,9 @@ public class UsuarioController {
 
     @Autowired
     UsuarioService usuarioService;
+
+    @Autowired
+    UsuarioMapper usuarioMapper;
 
     @GetMapping()
     public ResponseEntity<?> listarUsuarios() {
@@ -44,16 +48,10 @@ public class UsuarioController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> crearUsuario(@Valid @RequestBody CrearUsuarioRequest request) {
+    public ResponseEntity<?> crearUsuario(@RequestBody CrearUsuarioRequest request) {
         try {
             UsuarioModel usuario = usuarioService.crearUsuario(request);
-            CrearUsuarioResponse response = new CrearUsuarioResponse(
-                    usuario.getId(),
-                    usuario.getCreado(),
-                    usuario.getModificado(),
-                    usuario.getUltimoLogin(),
-                    usuario.getToken(),
-                    usuario.isActivo());
+            CrearUsuarioResponse response = usuarioMapper.toCrearUsuarioResponse(usuario);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (RuntimeException ex) {
             return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje", ex.getMessage()));

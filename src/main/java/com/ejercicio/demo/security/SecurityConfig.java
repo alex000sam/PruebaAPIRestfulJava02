@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST,"/api/usuarios").permitAll() // permitir crear usuario solo con POST
-                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll() // permitir acceder Swagger
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll() // permitir acceder Swagger
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex
