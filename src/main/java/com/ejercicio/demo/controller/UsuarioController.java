@@ -4,6 +4,7 @@ import com.ejercicio.demo.dto.*;
 import com.ejercicio.demo.model.UsuarioModel;
 import com.ejercicio.demo.service.UsuarioService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class UsuarioController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> crearUsuario(@RequestBody CrearUsuarioRequest request) {
+    public ResponseEntity<?> crearUsuario(@Valid @RequestBody CrearUsuarioRequest request) {
         try {
             UsuarioModel usuario = usuarioService.crearUsuario(request);
             CrearUsuarioResponse response = new CrearUsuarioResponse(
