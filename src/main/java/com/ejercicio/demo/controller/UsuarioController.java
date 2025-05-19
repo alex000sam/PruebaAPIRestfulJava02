@@ -28,23 +28,19 @@ public class UsuarioController {
 
     @GetMapping()
     public ResponseEntity<?> listarUsuarios() {
-        try {
-            List<UsuarioModel> usuarios = usuarioService.listarTodosLosUsuarios();
-            List<ListarUsuarioResponse> responses = usuarios.stream()
-                    .map(usuario -> new ListarUsuarioResponse(
-                            usuario.getId(),
-                            usuario.getNombre(),
-                            usuario.getCorreo(),
-                            usuario.getCreado(),
-                            usuario.getModificado(),
-                            usuario.getUltimoLogin(),
-                            usuario.isActivo()
-                    ))
-                    .toList();
-            return ResponseEntity.ok(responses);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("mensaje", "Error al obtener los usuarios"));
-        }
+        List<UsuarioModel> usuarios = usuarioService.listarTodosLosUsuarios();
+        List<ListarUsuarioResponse> responses = usuarios.stream()
+                .map(usuario -> new ListarUsuarioResponse(
+                        usuario.getId(),
+                        usuario.getNombre(),
+                        usuario.getCorreo(),
+                        usuario.getCreado(),
+                        usuario.getModificado(),
+                        usuario.getUltimoLogin(),
+                        usuario.isActivo()
+                ))
+                .toList();
+        return ResponseEntity.ok(responses);
     }
 
     @PostMapping()
