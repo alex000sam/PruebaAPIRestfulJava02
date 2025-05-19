@@ -49,13 +49,9 @@ public class UsuarioController {
 
     @PostMapping()
     public ResponseEntity<?> crearUsuario(@RequestBody CrearUsuarioRequest request) {
-        try {
-            UsuarioModel usuario = usuarioService.crearUsuario(request);
-            CrearUsuarioResponse response = usuarioMapper.toCrearUsuarioResponse(usuario);
-            return ResponseEntity.status(HttpStatus.CREATED).body(response);
-        } catch (RuntimeException ex) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("mensaje", ex.getMessage()));
-        }
+        UsuarioModel usuario = usuarioService.crearUsuario(request);
+        CrearUsuarioResponse response = usuarioMapper.toCrearUsuarioResponse(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
