@@ -3,6 +3,7 @@ package com.ejercicio.demo.service;
 import com.ejercicio.demo.dto.CrearTelefonoRequest;
 import com.ejercicio.demo.dto.CrearUsuarioRequest;
 import com.ejercicio.demo.dto.ModificarUsuarioRequest;
+import com.ejercicio.demo.exception.UsuarioNoEncontradoException;
 import com.ejercicio.demo.model.TelefonoModel;
 import com.ejercicio.demo.model.UsuarioModel;
 import com.ejercicio.demo.repository.UsuarioRepository;
@@ -84,7 +85,7 @@ public class UsuarioService {
     public UsuarioModel modificarUsuario(UUID id, ModificarUsuarioRequest request) {
 
         UsuarioModel usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado"));
 
         //Validar formato de correo
         if (!Pattern.matches(correoRegex, request.getCorreo())) {
@@ -128,7 +129,7 @@ public class UsuarioService {
     public UsuarioModel modificarParcialUsuario(UUID id, ModificarUsuarioRequest request) {
 
         UsuarioModel usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado"));
 
         //Validar formato de correo
         if (request.getCorreo() != null && !request.getCorreo().isBlank()) {
@@ -178,14 +179,14 @@ public class UsuarioService {
 
     public void eliminarUsuario(UUID id) {
         if (!usuarioRepository.existsById(id)) {
-            throw new RuntimeException("Usuario no encontrado");
+            throw new UsuarioNoEncontradoException("Usuario no encontrado");
         }
         usuarioRepository.deleteById(id);
     }
 
     public UsuarioModel obtenerUsuario(UUID id) {
         UsuarioModel usuario = usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+                .orElseThrow(() -> new UsuarioNoEncontradoException("Usuario no encontrado"));
         return usuario;
     }
 }
